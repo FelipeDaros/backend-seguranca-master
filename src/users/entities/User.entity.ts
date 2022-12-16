@@ -1,8 +1,9 @@
 import { Exclude } from "class-transformer";
+import { randomUUID } from "crypto";
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
 @Entity('users')
-export class UserEntity{
+export class User{
 
   @PrimaryColumn()
   id: string;
@@ -17,4 +18,7 @@ export class UserEntity{
   @CreateDateColumn()
   created_at: Date;
 
+  constructor(){
+    this.id = randomUUID()
+  }
 }

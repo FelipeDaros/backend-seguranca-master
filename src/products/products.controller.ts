@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { CreateProductDto } from './dto/CreateProduct.dto';
 import { UpdateProductDto } from './dto/UpdateProduct.dto';
 import { ProductsService } from './products.service';
@@ -21,7 +22,15 @@ export class ProductsController {
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
-  public update(@Param('id') id: string, @Body() updateProductDto:UpdateProductDto){
-    return this.productService.update(id, updateProductDto);
+  public update(@Param('id') id: string, @Body() updateProductDto:UpdateProductDto, @Res() res:Response){
+    this.productService.update(id, updateProductDto);
+    return res.json({message: "Produto alterado!"});
   }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.OK)
+  public delete(@Param('id')id: string){
+    return this.productService.delete(id);
+  }
+
 }

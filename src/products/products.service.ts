@@ -34,7 +34,7 @@ export class ProductsService {
   }
 
   public async update(id: string, updateProductDto: UpdateProductDto): Promise<Product | any>{
-    const productExits = await this.productRepository.findOne(updateProductDto.name);
+    const productExits = await this.productRepository.findOne(id);
 
     if(!productExits){
       throw new HttpException({
@@ -42,13 +42,13 @@ export class ProductsService {
         error: 'Produto não cadastrado'
       }, HttpStatus.NOT_FOUND)
     }
+    
+    await this.productRepository.update(id, updateProductDto);
 
-    const alteredProduct = await this.productRepository.update(id, updateProductDto);
-
-    return alteredProduct;
+    return null;
   }
 
-  public async delete(id: string): Promise<string>{
+  public async delete(id: string): Promise<void>{
     const productExits = await this.productRepository.findOne(id);
 
     if(!productExits){
@@ -58,6 +58,6 @@ export class ProductsService {
       }, HttpStatus.NOT_FOUND)
     }
 
-    return "Produto deletado!";
+    return null;
   }
 }

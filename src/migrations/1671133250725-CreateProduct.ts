@@ -21,6 +21,10 @@ export class CreateProduct1671133250725 implements MigrationInterface {
                     type: "int",
                 },
                 {
+                    name: "price",
+                    type: "decimal"
+                },
+                {
                     name: "created_at",
                     type: "timestamp",
                     default: "now()"
