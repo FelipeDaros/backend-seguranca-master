@@ -1,9 +1,9 @@
 module.exports = {
   type: 'sqlite',
-  database: './src/db.sql',
-  entities: ['dist/**/*.entity.js'],
+  database: './src/database.sqlite',
+  entities: ['dist/**/entities/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
   cli: {
-    migrationsDir: 'src/migrations',
+    migrationsDir: './src/migrations/*.ts',
   },
 };
