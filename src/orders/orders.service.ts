@@ -33,15 +33,11 @@ export class OrdersService {
       id_product.push(e);
     });
 
-    //console.log(id_product);
-
     for(var i = 0; i < createOrderDto.products_id.length; i++){
       const createOrderDetail = this.orderDetailsProductsRepository.create({
         order_id: order.id,
         products_id: id_product[i]
       });
-
-      console.log(createOrderDetail);
       
       await this.orderDetailsProductsRepository.save(createOrderDetail);
     }
