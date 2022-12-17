@@ -10,11 +10,11 @@ export class OrderDetailsProducts{
   @PrimaryColumn()
   id: string;
 
-  @ManyToOne(type => Product)
+  @ManyToOne(type => Product, {cascade: true, onDelete: "CASCADE"})
   @JoinColumn({name: 'products', referencedColumnName: 'id'})
-  products_id: Product[] | string;
+  products_id: Product[];
 
-  @ManyToOne(type => OrderEntity)
+  @ManyToOne(type => OrderEntity, {cascade: true, onDelete: "CASCADE"})
   @JoinColumn({name: 'orders', referencedColumnName: 'id'})
   order_id: string;
 

@@ -25,33 +25,28 @@ export class OrdersService {
 
   public async create(createOrderDto:CreateOrderDto) {
     const order = this.orderRepository.create(createOrderDto);
+    var id_product = [];
 
     await this.orderRepository.save(order);
-
-    //const itens = await Promise.all(createOrderDto.products_id.map((product) => this.preloadIdProducts(product.id)));
-
-    console.log();
-
-    const createOrderDetails = this.orderDetailsProductsRepository.create({
-      order_id: order.id,
-      products_id: "45daf329-8d8e-4c8f-9fb6-3b365237f8ca"
-    })
-
-    await this.orderDetailsProductsRepository.save(createOrderDetails)
     
+    createOrderDto.products_id.map(e => {
+      id_product.push(e);
+    });
 
-    return createOrderDetails
-  }
+    //console.log(id_product);
 
-  private async preloadIdProducts(id: string){
-    const iten = await this.productRepository.findOne(id);
+    for(var i = 0; i < createOrderDto.products_id.length; i++){
+      const createOrderDetail = this.orderDetailsProductsRepository.create({
+        order_id: order.id,
+        products_id: id_product[i]
+      });
 
-    if(iten){
-      return iten;
+      console.log(createOrderDetail);
+      
+      await this.orderDetailsProductsRepository.save(createOrderDetail);
     }
 
     return null;
   }
-
 
 }

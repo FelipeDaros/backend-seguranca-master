@@ -8,7 +8,7 @@ export class OrderEntity{
   @PrimaryColumn()
   id: string;
 
-  @ManyToOne(type => User, {eager: true})
+  @ManyToOne(type => User, {eager: true, cascade: true, onDelete: "CASCADE"})
   @JoinColumn({name: 'users', referencedColumnName: 'id'})
   user_id: User;
 

@@ -1,4 +1,4 @@
-import { IsArray, IsNumber, IsString } from "class-validator";
+import { IsArray, IsNumber, IsString, } from "class-validator";
 import { Product } from "src/products/entities/Product.entity";
 import { User } from "src/users/entities/User.entity";
 
@@ -12,6 +12,6 @@ export class CreateOrderDto{
   @IsNumber()
   total: number;
 
-  @IsString()
-  products_id: Product[] | string;
+  @IsArray()
+  products_id: Product[];
 }
