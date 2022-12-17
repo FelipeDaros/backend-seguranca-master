@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/CreateUser.dto';
 import { UpdateUserDto } from './dto/UpdateUser.dto';
 import { User } from './entities/User.entity';
 import * as bcrypt from 'bcrypt';
+import { SigninDto } from './dto/Signin.dto';
 
 @Injectable()
 export class UsersService {
@@ -71,5 +72,31 @@ export class UsersService {
     }
 
     return null
+  }
+
+  async signin(signinDto: SigninDto):Promise<any>{
+    const userExits = await this.userRepository.findOne({
+      where: {
+        email: signinDto.email
+      }
+    });
+
+    if(!userExits){
+      throw new HttpException({
+        status: HttpStatus.NOT_FOUND,
+        error: 'Email ou senha incorreta!'
+      }, HttpStatus.NOT_FOUND)
+    }
+
+    const passwordCompare = await bcrypt.compare(signinDto.password, userExits.password);
+
+    if(!passwordCompare){
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Email ou senha incorreta!'
+      }, HttpStatus.BAD_REQUEST)
+    }
+
+    return JSON.stringify(userExits.id);
   }
 }

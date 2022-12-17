@@ -12,7 +12,7 @@ export class OrderDetailsProducts{
 
   @ManyToOne(type => Product)
   @JoinColumn({name: 'products', referencedColumnName: 'id'})
-  products_id: Product;
+  products_id: Product[] | string;
 
   @ManyToOne(type => OrderEntity)
   @JoinColumn({name: 'orders', referencedColumnName: 'id'})

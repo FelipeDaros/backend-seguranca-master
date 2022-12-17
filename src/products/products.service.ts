@@ -18,6 +18,12 @@ export class ProductsService {
     return products;
   }
 
+  public async findOne(id: string): Promise<Product>{
+    const product = await this.productRepository.findOne(id);
+
+    return product;
+  }
+
   public async create(createProductDto: CreateProductDto): Promise<Product>{
     const productExits = await this.productRepository.findOne(createProductDto.name);
 
@@ -57,6 +63,8 @@ export class ProductsService {
         error: 'Produto não cadastrado'
       }, HttpStatus.NOT_FOUND)
     }
+
+    await this.productRepository.delete(id);
 
     return null;
   }

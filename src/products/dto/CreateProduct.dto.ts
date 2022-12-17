@@ -9,4 +9,8 @@ export class CreateProductDto{
   @IsNumber()
   @IsNotEmpty()
   quantity: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  price: number;
 }

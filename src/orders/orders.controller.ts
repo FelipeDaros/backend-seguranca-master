@@ -7,7 +7,6 @@ export class OrdersController {
   constructor(private readonly orderService: OrdersService){}
 
   @Get()
-  @HttpCode(HttpStatus.FOUND)
   public findAll(){
     return this.orderService.findAllOrders();
   }

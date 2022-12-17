@@ -9,9 +9,13 @@ export class ProductsController {
   constructor(private readonly productService: ProductsService){}
   
   @Get()
-  @HttpCode(HttpStatus.FOUND)
   public findAll(){
     return this.productService.findAll();
+  }
+
+  @Get(":id")
+  public fidnOne(@Param("id")id: string){
+    return this.productService.findOne(id);
   }
 
   @Post()
@@ -20,14 +24,14 @@ export class ProductsController {
     return this.productService.create(createProductDto);
   }
 
-  @Put(':id')
+  @Put(":id")
   @HttpCode(HttpStatus.OK)
-  public update(@Param('id') id: string, @Body() updateProductDto:UpdateProductDto, @Res() res:Response){
+  public update(@Param("id") id: string, @Body() updateProductDto:UpdateProductDto, @Res() res:Response){
     this.productService.update(id, updateProductDto);
     return res.json({message: "Produto alterado!"});
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @HttpCode(HttpStatus.OK)
   public delete(@Param('id')id: string){
     return this.productService.delete(id);

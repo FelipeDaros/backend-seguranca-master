@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { json, Response } from 'express';
 import { CreateUserDto } from './dto/CreateUser.dto';
+import { SigninDto } from './dto/Signin.dto';
 import { UpdateUserDto } from './dto/UpdateUser.dto';
 import { UsersService } from './users.service';
 
@@ -11,7 +12,6 @@ export class UsersController {
   ){}
 
   @Get()
-  @HttpCode(HttpStatus.FOUND)
   public findAll(){
     return this.userService.findAll();
   }
@@ -36,5 +36,11 @@ export class UsersController {
     this.userService.delete(id);
 
     return res.json({message: "Usuário deletado com sucesso!"});
+  }
+
+  @Post('/signin')
+  @HttpCode(HttpStatus.OK)
+  public sigin(@Body() signinDto:SigninDto){
+    return this.userService.signin(signinDto);
   }
 }

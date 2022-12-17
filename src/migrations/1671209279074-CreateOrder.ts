@@ -18,7 +18,7 @@ export class CreateOrder1671209279074 implements MigrationInterface {
                 },
                 {
                     name: "total",
-                    type: "numeric"
+                    type: "numeric(5,2)"
                 },
                 {
                     name: "created_at",

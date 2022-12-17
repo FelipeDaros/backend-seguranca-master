@@ -13,5 +13,5 @@ export class CreateOrderDto{
   total: number;
 
   @IsString()
-  products_id: Product;
+  products_id: Product[] | string;
 }
