@@ -1,6 +1,10 @@
 module.exports = {
-  type: 'sqlite',
-  database: './src/database.sqlite',
+  type: 'postgres',
+  host: 'localhost',
+  port: 5342,
+  username: '',
+  password: '',
+  database: '',
   entities: ['dist/**/entities/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
   cli: {

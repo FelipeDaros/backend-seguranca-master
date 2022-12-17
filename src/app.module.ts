@@ -9,8 +9,12 @@ import { OrdersModule } from './orders/orders.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: './src/database.sqlite',
+      type: 'postgres',
+      host: 'localhost',
+      port: 5342,
+      username: '',
+      password: '',
+      database: '',
       entities: ['dist/**/entities/*.entity.js'],
       migrations: ['./src/migrations/*.js'],
       synchronize: true,
